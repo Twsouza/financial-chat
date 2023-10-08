@@ -9,6 +9,7 @@ All the configuration is done through environment variables. You can see, or cop
 ```bash
 cp server/.env.example server/.env
 cp bot/.env.example bot/.env
+cp client/.env.example client/.env
 ```
 
 (See Makefile `setEnvServerAndBot` target for more details)

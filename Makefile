@@ -12,3 +12,4 @@ keepContainerOpen:
 setEnvServerAndBot:
 	cp server/.env.example server/.env
 	cp bot/.env.example bot/.env
+	cp client/.env.example client/.env

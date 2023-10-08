@@ -1,0 +1,16 @@
+<div class="container">
+  <%= form({action:"/login", method: "POST"}) { %>
+    <div class="mb-3">
+      <label for="email" class="form-label"><%= t("email_label") %></label>
+      <input type="email" class="form-control" name="email" id="email">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label"><%= t("password_label") %></label>
+      <input type="password" class="form-control" name="password" id="password">
+    </div>
+    <button type="submit" class="btn btn-primary"><%= t("login_button") %></button>
+    <%= linkTo(["/signup"], {class: "btn btn-secondary"}) { %>
+      <%= t("signup_button") %>
+    <% } %>
+  <% } %>
+</div>

@@ -1,0 +1,29 @@
+<div class="container text-center">
+  <div class="row algin-items-start">
+    <%= for (r) in rooms { %>
+      <div class="col-3 ">
+        <div class="room-box justify-content-center">
+          <div class="mb-3">
+            <%= r.Name %>
+          </div>
+
+          <%= linkTo(["/rooms/", r.ID], {class: "btn btn-primary"}) { %>
+            <%= t("join_room_button") %>
+          <% } %>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <%= form({action:"/rooms", method: "POST"}) { %>
+        <div class="mb-3">
+          <label for="name" class="form-label"><%= t("create_room_label") %></label>
+          <input type="text" class="form-control" name="name" id="name">
+        </div>
+        <button type="submit" class="btn btn-primary"><%= t("create_room_button") %></button>
+      <% } %>
+    </div>
+  </div>
+</div>

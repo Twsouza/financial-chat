@@ -1,0 +1,39 @@
+<div class="container" id="chat-container">
+  <div id="chat-box">
+
+  </div>
+  <form action="javascript:;" onsubmit="sendMessage(this)">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder='<%= t("send_message_placeholder") %>' aria-label="" aria-describedby="send-button" id="message">
+      <button class="btn btn-outline-secondary" type="button" id="send-button" onclick="sendMessage()"><%= t("send_button") %></button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const socket = new WebSocket("<%= wsURL %>?userId=<%= userID %>&username=<%= username %>");
+
+  socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    const chatBox = document.querySelector("#chat-box");
+    const message = document.createElement("div");
+    message.classList.add("message");
+    message.innerHTML = `
+      <div class="message">
+        <span class="message-user">${data.user}: </span>
+        ${data.content}
+      </div>
+    `;
+    chatBox.appendChild(message);
+  };
+
+  function sendMessage() {
+    const input = document.querySelector("#message");
+    const message = input.value;
+    input.value = "";
+    socket.send(message);
+
+    return false;
+  }
+
+</script>

@@ -1,0 +1,49 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+html, body {
+  height: 100%;
+}
+
+header {
+  background-color: #62a5ee;
+  border-bottom: 1px solid #e9ecef;
+  box-sizing: border-box;
+  padding: 0.5rem 0;
+  margin-bottom: 1em;
+}
+
+.title {
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.room-box {
+  border: 1px solid #e9ecef;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin: .5em;
+  margin-bottom: 1em;
+}
+
+#chat-box {
+  height: 600px;
+  overflow-y: scroll;
+}
+
+.message {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 5px;
+  padding: 5px 10px 5px 12px;
+  width: 90%;
+}
+
+.message-user {
+  font-weight: bold;
+}

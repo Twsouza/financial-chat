@@ -6,6 +6,15 @@ services:
     command: "startBot"
     volumes:
       - .:/go/src
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client:/go/src
+    ports:
+    - "3000:3000"
+    - "35729:35729"
   server:
     build: ./server
     command: "startServer"
@@ -13,6 +22,7 @@ services:
       - .:/go/src
     ports:
     - "8080:8080"
+
   db:
     image: postgres:9.6
     environment:

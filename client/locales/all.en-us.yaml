@@ -1,0 +1,23 @@
+# For more information on using i18n see: https://github.com/nicksnyder/go-i18n
+- id: welcome_greeting
+  translation: "Financial Chat"
+- id: login_button
+  translation: "Login"
+- id: password_label
+  translation: "Password"
+- id: email_label
+  translation: "Email"
+- id: username_label
+  translation: "Username"
+- id: signup_button
+  translation: "Sign Up"
+- id: send_button
+  translation: "Send"
+- id: send_message_placeholder
+  translation: "Send a message"
+- id: create_room_button
+  translation: "Create a new room"
+- id: create_room_label
+  translation: "Name"
+- id: join_room_button
+  translation: "Join"

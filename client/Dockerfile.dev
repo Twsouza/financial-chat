@@ -1,0 +1,14 @@
+FROM gobuffalo/buffalo:v0.18.14
+
+RUN mkdir -p /go/src
+WORKDIR /go/src
+
+ADD . .
+
+RUN go get -t -v ./...
+
+ENV ADDR=0.0.0.0
+
+EXPOSE 3000
+
+ENTRYPOINT [ "buffalo", "dev" ]

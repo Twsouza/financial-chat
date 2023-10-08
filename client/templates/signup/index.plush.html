@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Please enter the details:</h1>
+  <%= form({action:"/signup", method: "POST"}) { %>
+    <div class="mb-3">
+      <label for="username" class="form-label"><%= t("username_label") %></label>
+      <input type="text" class="form-control" name="username" id="username">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label"><%= t("email_label") %></label>
+      <input type="email" class="form-control" name="email" id="email">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label"><%= t("password_label") %></label>
+      <input type="password" class="form-control" name="password" id="password">
+    </div>
+    <button type="submit" class="btn btn-primary"><%= t("signup_button") %></button>
+  <% } %>
+</div>
