@@ -8,7 +8,10 @@ All the configuration is done through environment variables. You can see, or cop
 
 ```bash
 cp server/.env.example server/.env
+cp bot/.env.example bot/.env
 ```
+
+(See Makefile `setEnvServerAndBot` target for more details)
 
 Use docker-compose to start the project with a single command:
 
@@ -37,3 +40,11 @@ The server will handle signups and logins from the users. Also, it will handle t
 ### Queue
 
 The queue service will have two queues: message and commands. The message queue will sent message to the chat room, and the commands queue will send commands to the bot.
+
+### Bot
+
+The bot will process the commands queue and send the results back to the chat room. The bot services uses a worker pool, the environment variable starts the `CONCURRENCY_WORKERS` number of workers. The bot will process the commands in parallel. The bot will send the results to the message queue.
+
+#### Available commands
+
+- `/stock=stock_code` - Get the current price of the stock, data from https://stooq.com, and send a message to the queue with the stock quote, aka `stock-bot`.

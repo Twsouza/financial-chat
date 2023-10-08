@@ -1,9 +1,14 @@
 version: '3'
 
 services:
+  bot:
+    build: ./bot
+    command: "startBot"
+    volumes:
+      - .:/go/src
   server:
     build: ./server
-    command: "keepContainerOpen"
+    command: "startServer"
     volumes:
       - .:/go/src
     ports:
