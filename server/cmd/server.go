@@ -49,6 +49,14 @@ func main() {
 	userSvc := services.NewUserService(userRep)
 	userCtrl := controller.NewUserController(userSvc)
 
-	routes := router.SetupRouter(userCtrl)
+	hub, err := services.NewHub()
+	if err != nil {
+		log.Fatalf("error creating chat hub: %v", err)
+	}
+	go hub.Run()
+
+	chatCtrl := controller.NewChatController(hub)
+
+	routes := router.SetupRouter(userCtrl, chatCtrl)
 	routes.Run(":8080")
 }

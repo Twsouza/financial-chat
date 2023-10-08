@@ -3,12 +3,10 @@ package services
 import (
 	"context"
 	"fmt"
-	"os"
 	"server/application/dto"
 	"server/application/repositories"
 	"server/application/utils"
 	"server/core"
-	"strconv"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
@@ -18,18 +16,12 @@ type UserService struct {
 	UserRepository repositories.UserRepository
 }
 
-var (
-	// timeout_repository is the timeout for the repository layer, default to 5 seconds
-	// can be set using TIMEOUT_REPOSITORY env var
-	timeout_repository = 5
+const (
+	// TODO: replace for an env var
+	Timeout = 5
+	// TODO: replace for an env var
+	SECRET = "secret"
 )
-
-func init() {
-	timeout, err := strconv.Atoi(os.Getenv("TIMEOUT"))
-	if err == nil {
-		timeout_repository = timeout
-	}
-}
 
 func NewUserService(ur repositories.UserRepository) *UserService {
 	return &UserService{
@@ -38,7 +30,7 @@ func NewUserService(ur repositories.UserRepository) *UserService {
 }
 
 func (us *UserService) CreateUser(c context.Context, req *dto.CreateUserReq) (*dto.CreateUserRes, error) {
-	ctx, cancel := context.WithTimeout(c, time.Duration(timeout_repository)*time.Second)
+	ctx, cancel := context.WithTimeout(c, time.Duration(Timeout)*time.Second)
 	defer cancel()
 
 	u, err := core.NewUser(req.Username, req.Email, req.Password)
@@ -59,7 +51,7 @@ func (us *UserService) CreateUser(c context.Context, req *dto.CreateUserReq) (*d
 }
 
 func (us *UserService) Login(c context.Context, req *dto.LoginUserReq) (*dto.LoginUserRes, error) {
-	ctx, cancel := context.WithTimeout(c, time.Duration(timeout_repository)*time.Second)
+	ctx, cancel := context.WithTimeout(c, time.Duration(Timeout)*time.Second)
 	defer cancel()
 
 	u, err := us.UserRepository.FindByEmail(ctx, req.Email)
@@ -76,7 +68,7 @@ func (us *UserService) Login(c context.Context, req *dto.LoginUserReq) (*dto.Log
 		Issuer:    u.ID,
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	ss, err := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	ss, err := token.SignedString([]byte(SECRET))
 	if err != nil {
 		return nil, err
 	}
