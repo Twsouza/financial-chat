@@ -1,0 +1,2 @@
+# create an entry to ignore .env in all subdirs
+**/.env
