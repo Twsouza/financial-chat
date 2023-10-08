@@ -2,4 +2,6 @@ FROM golang:1.19
 
 WORKDIR /go/src
 
-ENTRYPOINT [ "tail", "-f", "/dev/null" ]
+RUN apt-get update && apt-get install -y make
+
+ENTRYPOINT [ "make" ]

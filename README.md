@@ -33,3 +33,7 @@ The server will handle signups and logins from the users. Also, it will handle t
   - Payload:
     - `username` - string
     - `password` - string
+
+### Queue
+
+The queue service will have two queues: message and commands. The message queue will sent message to the chat room, and the commands queue will send commands to the bot.

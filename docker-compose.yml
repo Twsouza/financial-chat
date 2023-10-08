@@ -3,6 +3,7 @@ version: '3'
 services:
   server:
     build: ./server
+    command: "keepContainerOpen"
     volumes:
       - .:/go/src
     ports:
@@ -17,3 +18,8 @@ services:
       - "5432:5432"
     volumes:
       - /var/lib/postgresql/data
+  rabbit:
+    build: ./queue
+    ports:
+      - "15672:15672"
+      - "5672:5672"

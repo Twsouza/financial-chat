@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"queue"
 	"server/application/controller"
 	"server/application/repositories"
 	"server/application/services"
@@ -45,15 +46,20 @@ func main() {
 		log.Fatalf("error connecting to db: %v", err)
 	}
 
+	rabbitMQ := queue.NewRabbitMQ()
+	ch := rabbitMQ.Connect()
+	defer ch.Close()
+
 	userRep := repositories.NewUserRepository(dbConn)
 	userSvc := services.NewUserService(userRep)
 	userCtrl := controller.NewUserController(userSvc)
 
-	hub, err := services.NewHub()
+	hub, err := services.NewHub(rabbitMQ)
 	if err != nil {
 		log.Fatalf("error creating chat hub: %v", err)
 	}
 	go hub.Run()
+	rabbitMQ.Consume(hub.Queue)
 
 	chatCtrl := controller.NewChatController(hub)
 

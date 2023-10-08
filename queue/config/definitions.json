@@ -1,0 +1,60 @@
+{
+  "rabbit_version": "3.12.6",
+  "rabbitmq_version": "3.12.6",
+  "product_name": "RabbitMQ",
+  "product_version": "3.12.6",
+  "users": [
+    {
+      "name": "rabbitmq",
+      "password_hash": "J0EVWvVgfOLHPI3jNb+ektx4q62cnR52qRsxrkq6Cjcg2Dnv",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "chat"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "rabbitmq",
+      "vhost": "chat",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "message",
+      "vhost": "chat",
+      "durable": true,
+      "auto_delete": false
+    },
+    {
+      "name": "commands",
+      "vhost": "chat",
+      "durable": true,
+      "auto_delete": false
+    }
+  ],
+  "exchanges": [
+  ],
+  "bindings": [
+    {
+      "source": "amq.direct",
+      "vhost": "chat",
+      "destination": "message",
+      "destination_type": "queue",
+      "routing_key": "message"
+    },
+    {
+      "source": "amq.direct",
+      "vhost": "chat",
+      "destination": "commands",
+      "destination_type": "queue",
+      "routing_key": "commands"
+    }
+  ]
+}
