@@ -49,3 +49,5 @@ The bot will process the commands queue and send the results back to the chat ro
 #### Available commands
 
 - `/stock=stock_code` - Get the current price of the stock, data from https://stooq.com, and send a message to the queue with the stock quote, aka `stock-bot`.
+
+![Screenshot from 2023-10-07 22-47-40](https://github.com/Twsouza/financial-chat/assets/8239709/ed1326fe-cdc4-4c35-af07-ecc6e33aa651)
