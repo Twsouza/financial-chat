@@ -1,6 +1,10 @@
+Disclaimer:
+
+The objective of this test was to implement a backend system; the front end was not the primary focus but was created as a means to validate and facilitate the use of the backend.
+
 # Financial Chat
 
-A web browser-based chat application written in Golang. Users may create accounts, login, and chat with other users. Users will be able to send commands to the chat bot and the chat bot will send the results of the command back to the chatroom. The application is built using the Gorilla WebSocket and Gin.
+A web browser-based chat application written in Golang. Users may create accounts, login, and chat with other users. Users will be able to send commands to the chatbot and the chatbot will send the results of the command back to the chatroom. The application is built using the Gorilla WebSocket and Gin.
 
 ## How to run
 
@@ -40,14 +44,14 @@ The server will handle signups and logins from the users. Also, it will handle t
 
 ### Queue
 
-The queue service will have two queues: message and commands. The message queue will sent message to the chat room, and the commands queue will send commands to the bot.
+The queue service will have two queues: `message` and `commands`. The message queue will send a message to the chat room, and the commands queue will send commands to the bot.
 
 ### Bot
 
-The bot will process the commands queue and send the results back to the chat room. The bot services uses a worker pool, the environment variable starts the `CONCURRENCY_WORKERS` number of workers. The bot will process the commands in parallel. The bot will send the results to the message queue.
+The bot will process the commands queue and send the results back to the chat room. The bot services use a worker pool, the environment variable starts the `CONCURRENCY_WORKERS` number of workers. The bot will process the commands in parallel. The bot will send the results to the message queue.
 
 #### Available commands
 
-- `/stock=stock_code` - Get the current price of the stock, data from https://stooq.com, and send a message to the queue with the stock quote, aka `stock-bot`.
+- `/stock=stock_code` - Get the current price of the stock, and data from https://stooq.com, and send a message to the queue with the stock quotes, aka `stock-bot`.
 
 ![Screenshot from 2023-10-07 22-47-40](https://github.com/Twsouza/financial-chat/assets/8239709/ed1326fe-cdc4-4c35-af07-ecc6e33aa651)
